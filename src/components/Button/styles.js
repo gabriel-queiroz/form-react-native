@@ -1,15 +1,16 @@
 import styled from "styled-components/native";
+import { BorderlessButton } from "react-native-gesture-handler";
 
-export const Container = styled.TouchableNativeFeedback``;
-
-export const Content = styled.View`
+export const Container = styled(BorderlessButton).attrs({
+  borderless: false
+})`
   margin-top: 20px;
   height: 50px;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   opacity: 10;
-  background-color: ${props => (props.disabled ? "#4fc3f7" : "#3887aa")};
+  background-color: ${props => (props.enable ? "#4fc3f7" : "#3887aa")};
 `;
 
 export const Title = styled.Text`

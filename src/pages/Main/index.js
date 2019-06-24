@@ -21,7 +21,6 @@ class Main extends Component {
     return (
       <Container>
         <Title>Cadastro de Usuário</Title>
-
         <InputMaterial
           onChangeText={this.props.handleChange("name")}
           onBlur={this.props.handleBlur("name")}
