@@ -15,14 +15,9 @@ class Main extends Component {
       dirty,
       isSubmitting,
       handleSubmit,
+      isValid,
       ...rest
     } = this.props;
-    console.tron.log(errors);
-    console.tron.log(touched);
-    console.tron.log(values);
-    console.tron.log(rest);
-    console.tron.log("dirt" + !dirty);
-    console.tron.log("isSubmitting  :" + isSubmitting);
     return (
       <Container>
         <Title>Cadastro de Usuário</Title>
@@ -51,11 +46,7 @@ class Main extends Component {
           label="Senha"
           error={errors.password && touched.password ? errors.password : null}
         />
-        <Button
-          onPress={handleSubmit}
-          disabled={!dirty || isSubmitting}
-          title="Salvar"
-        />
+        <Button onPress={() => alert("aaa")} title="Salvar" />
       </Container>
     );
   }
@@ -64,7 +55,8 @@ class Main extends Component {
 export default withFormik({
   mapPropsToValues: () => ({ name: "", lastName: "", email: "", password: "" }),
   handleSubmit: values => {
-    alert(JSON.stringify(values));
+    alert("entrou");
+    //  alert(JSON.stringify(values));
   },
   validate: (values, props) => {
     const errors = {};

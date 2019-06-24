@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Container, Content, Title } from "./styles";
+import { Container, Title } from "./styles";
 
 const Button = ({ title, disabled, onPress }) => (
-  <Container onPress={onPress}>
-    <Title>{title}</Title>
+  <Container enabled={true} onPress={onPress}>
+    <Title> {title}</Title>
   </Container>
 );
 
