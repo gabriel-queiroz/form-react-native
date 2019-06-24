@@ -46,7 +46,7 @@ class Main extends Component {
           label="Senha"
           error={errors.password && touched.password ? errors.password : null}
         />
-        <Button onPress={() => alert("aaa")} title="Salvar" />
+        <Button disabled={!isValid} onPress={handleSubmit} title="Salvar" />
       </Container>
     );
   }
@@ -55,8 +55,7 @@ class Main extends Component {
 export default withFormik({
   mapPropsToValues: () => ({ name: "", lastName: "", email: "", password: "" }),
   handleSubmit: values => {
-    alert("entrou");
-    //  alert(JSON.stringify(values));
+    alert(JSON.stringify(values));
   },
   validate: (values, props) => {
     const errors = {};
