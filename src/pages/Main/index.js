@@ -5,6 +5,7 @@ import {
   Title,
   InputMaterial
 } from "./styles";
+import * as Yup from "yup";
 import Button from "~/components/Button";
 import { withFormik } from "formik";
 
@@ -13,22 +14,23 @@ const MainForm = withFormik({
   handleSubmit: values => {
     alert(JSON.stringify(values));
   },
-  validate: (values, props) => {
-    const errors = {};
-    if (!values.name) {
-      errors.name = "Nome obrigatório";
-    }
-    if (!values.lastName) {
-      errors.lastName = "Sobrenome obrigatório";
-    }
-    if (!values.email) {
-      errors.email = "Email obrigatório";
-    }
-    if (!values.password) {
-      errors.password = "Senha obrigatório";
-    }
-    return errors;
-  }
+  validationSchema: Yup.object().shape({
+    name: Yup.string()
+      .min(5, "Mínimo de 5 caracteres")
+      .max(10, "Máximo de 10 caracteres")
+      .required("O nome é obrigatório"),
+    lastName: Yup.string()
+      .min(5, "Mínimo de 5 caracteres")
+      .max(10, "Máximo de 10 caracteres")
+      .required("O sobrenome é obrigatório"),
+    email: Yup.string()
+      .email("Email inválido")
+      .required("O email é obrigatório"),
+    password: Yup.string()
+      .min(5, "A senha deve ter no mínimo 5 caracteres")
+      .max(10, "A senha deve ter no máximo 10 caracteres")
+      .required("A senha é obrigatório")
+  })
 });
 
 const Main = props => {
