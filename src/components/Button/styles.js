@@ -10,11 +10,11 @@ export const Container = styled(BorderlessButton).attrs({
   justify-content: center;
   align-items: center;
   opacity: 10;
-  background-color: ${props => (props.enable ? "#4fc3f7" : "#3887aa")};
+  background-color: ${props => (props.enabled ? "#4fc3f7" : "#3887aa")};
 `;
 
 export const Title = styled.Text`
-  color: ${props => (props.disabled ? "#ffffffff" : "#c4c4c4")};
+  color: ${props => (props.enabled ? "#ffffffff" : "#c4c4c4")};
   font-weight: bold;
   font-size: 16px;
 `;

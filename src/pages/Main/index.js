@@ -45,7 +45,7 @@ class Main extends Component {
           label="Senha"
           error={errors.password && touched.password ? errors.password : null}
         />
-        <Button disabled={!isValid} onPress={handleSubmit} title="Salvar" />
+        <Button enabled={isValid} onPress={handleSubmit} title="Salvar" />
       </Container>
     );
   }
