@@ -1,6 +1,8 @@
 import styled from "styled-components/native";
 import { TextField } from "react-native-material-textfield";
 
+export const KeyboardAvoidingView = styled.KeyboardAvoidingView``;
+
 export const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -19,7 +21,9 @@ export const Title = styled.Text`
 
 export const InputMaterial = styled(TextField).attrs({
   labelFontSize: 16,
-  returnKeyType: "next"
+  returnKeyType: "next",
+  autoCorrect: false,
+  autoCapitalize: "none"
 })``;
 
 export const Input = styled.TextInput.attrs({

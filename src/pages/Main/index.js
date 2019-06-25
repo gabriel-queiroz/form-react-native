@@ -1,57 +1,14 @@
 import React, { Component } from "react";
-import { Container, Title, InputMaterial } from "./styles";
+import {
+  KeyboardAvoidingView,
+  Container,
+  Title,
+  InputMaterial
+} from "./styles";
 import Button from "~/components/Button";
 import { withFormik } from "formik";
 
-class Main extends Component {
-  componentDidMount() {
-    console.tron.log("bem vindo");
-  }
-  render() {
-    const {
-      values,
-      errors,
-      touched,
-      dirty,
-      isSubmitting,
-      handleSubmit,
-      isValid,
-      ...rest
-    } = this.props;
-    return (
-      <Container>
-        <Title>Cadastro de Usuário</Title>
-        <InputMaterial
-          onChangeText={this.props.handleChange("name")}
-          onBlur={this.props.handleBlur("name")}
-          label="Nome"
-          error={errors.name && touched.name ? errors.name : null}
-        />
-        <InputMaterial
-          onChangeText={this.props.handleChange("lastName")}
-          onBlur={this.props.handleBlur("lastName")}
-          label="Sobrenome"
-          error={errors.lastName && touched.lastName ? errors.lastName : null}
-        />
-        <InputMaterial
-          onChangeText={this.props.handleChange("email")}
-          onBlur={this.props.handleBlur("email")}
-          label="Email"
-          error={errors.email && touched.email ? errors.email : null}
-        />
-        <InputMaterial
-          onChangeText={this.props.handleChange("password")}
-          onBlur={this.props.handleBlur("password")}
-          label="Senha"
-          error={errors.password && touched.password ? errors.password : null}
-        />
-        <Button enabled={isValid} onPress={handleSubmit} title="Salvar" />
-      </Container>
-    );
-  }
-}
-
-export default withFormik({
+const MainForm = withFormik({
   mapPropsToValues: () => ({ name: "", lastName: "", email: "", password: "" }),
   handleSubmit: values => {
     alert(JSON.stringify(values));
@@ -72,4 +29,69 @@ export default withFormik({
     }
     return errors;
   }
-})(Main);
+});
+
+const Main = props => {
+  const {
+    errors,
+    touched,
+    handleSubmit,
+    isValid,
+    handleChange,
+    handleBlur
+  } = props;
+  return (
+    <Container>
+      <KeyboardAvoidingView>
+        <Title>Cadastro de Usuário</Title>
+        <InputMaterial
+          autoFocus
+          onChangeText={handleChange("name")}
+          onBlur={handleBlur("name")}
+          label="Nome"
+          returnKeyType="next"
+          onSubmitEditing={() => this.lastName.focus()}
+          error={errors.name && touched.name ? errors.name : null}
+        />
+        <InputMaterial
+          onChangeText={handleChange("lastName")}
+          onBlur={handleBlur("lastName")}
+          label="Sobrenome"
+          returnKeyType="next"
+          ref={ref => {
+            this.lastName = ref;
+          }}
+          onSubmitEditing={() => this.email.focus()}
+          error={errors.lastName && touched.lastName ? errors.lastName : null}
+        />
+        <InputMaterial
+          onChangeText={handleChange("email")}
+          onBlur={handleBlur("email")}
+          label="Email"
+          keyboardType="email-address"
+          returnKeyType="next"
+          ref={ref => {
+            this.email = ref;
+          }}
+          onSubmitEditing={() => this.password.focus()}
+          error={errors.email && touched.email ? errors.email : null}
+        />
+        <InputMaterial
+          onChangeText={handleChange("password")}
+          onBlur={handleBlur("password")}
+          label="Senha"
+          returnKeyType="send"
+          secureTextEntry
+          ref={ref => {
+            this.password = ref;
+          }}
+          onSubmitEditing={handleSubmit}
+          error={errors.password && touched.password ? errors.password : null}
+        />
+        <Button enabled={isValid} onPress={handleSubmit} title="Salvar" />
+      </KeyboardAvoidingView>
+    </Container>
+  );
+};
+
+export default MainForm(Main);
